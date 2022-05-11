@@ -4,18 +4,25 @@ import Login from "./src/screens/Login";
 import Home from "./src/screens/Home";
 import React from "react";
 import { AuthProvider } from "./src/components/AuthContext";
+import Navigation from "./src/components/Navigation";
 
-export default function App() {
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+import axios from "axios";
+
+const Stack = createNativeStackNavigator();
+
+const App = () => {
     return (
-        <AuthProvider>
-            <View style={styles.root}>
-                <Login />
-
-                <StatusBar style="auto" />
-            </View>
-        </AuthProvider>
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen name="Login" component={Login} />
+                <Stack.Screen name="Home" component={Home} />
+            </Stack.Navigator>
+        </NavigationContainer>
     );
-}
+};
 
 const styles = StyleSheet.create({
     root: {
@@ -29,3 +36,5 @@ const styles = StyleSheet.create({
     //     justifyContent: "center",
     // },
 });
+
+export default App;
