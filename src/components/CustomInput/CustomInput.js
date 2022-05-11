@@ -24,9 +24,13 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         paddingVertical: 20,
         paddingHorizontal: 20,
-        marginVertical: 5,
+        marginVertical: 10,
     },
-    input: {},
+    input: {
+        marginBottom: 10,
+
+        paddingHorizontal: 10,
+    },
 });
 
 export default CustomInput;

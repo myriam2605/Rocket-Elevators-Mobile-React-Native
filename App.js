@@ -3,14 +3,17 @@ import { StyleSheet, Text, View } from "react-native";
 import Login from "./src/screens/Login";
 import Home from "./src/screens/Home";
 import React from "react";
+import { AuthProvider } from "./src/components/AuthContext";
 
 export default function App() {
     return (
-        <View style={styles.root}>
-            <Login />
+        <AuthProvider>
+            <View style={styles.root}>
+                <Login />
 
-            <StatusBar style="auto" />
-        </View>
+                <StatusBar style="auto" />
+            </View>
+        </AuthProvider>
     );
 }
 
