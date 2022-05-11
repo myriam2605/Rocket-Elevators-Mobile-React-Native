@@ -1,12 +1,21 @@
 import { View, Text, Image, StyleSheet, useWindowDimensions } from "react-native";
-import React from "react";
-import Logo from "../../assets/Logo/R2.png";
+// import React {useState} from "react";
+import Logo from "../../Logo/R2.png";
+import CustomInput from "../components/CustomInput";
 
 const Login = () => {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
     const { height } = useWindowDimensions();
+
     return (
         <View style={styles.root}>
             <Image source={Logo} style={[styles.logo, { height: height * 0.3 }]} resizeMode="contain" />
+
+            <CustomInput placeholder="Username" value={username} setValue={setUsername} />
+
+            <CustomInput placeholder="Password" value={password} setValue={setPassword} secureTextEntry={true} />
         </View>
     );
 };
