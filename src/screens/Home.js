@@ -1,30 +1,32 @@
 import { View, Text, Button, FlatList, container, TouchableOpacity, StyleSheet } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import axios from "axios";
-
-const DATA = [
-    {
-        id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-        title: "First Item",
-    },
-    {
-        id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-        title: "Second Item",
-    },
-    {
-        id: "58694a0f-3da1-471f-bd96-145571e29d72",
-        title: "Third Item",
-    },
-];
+import Status from "./Status";
+// const DATA = [
+//     {
+//         id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+//         title: "First Item",
+//     },
+//     {
+//         id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+//         title: "Second Item",
+//     },
+//     {
+//         id: "58694a0f-3da1-471f-bd96-145571e29d72",
+//         title: "Third Item",
+//     },
+// ];
 
 const Item = ({ item, onPress, backgroundColor, textColor }) => (
     <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
-        <Text style={[styles.title, textColor]}>{item.title}</Text>
+        <Text style={[styles.title, textColor]}>{item.id}</Text>
     </TouchableOpacity>
 );
 
-const Home = () => {
+const Home = ({ navigation }) => {
+    const [data, setData] = useState([]);
+
     console.log("in home");
     const fetchData = () => {
         console.log("in home----------------------------");
@@ -38,21 +40,45 @@ const Home = () => {
             .catch((err) => console.log("we have an error:", err));
     };
     useEffect(() => {
-        fetchData();
+        const getMoviesFromApiAsync = async () => {
+            try {
+                const response = await fetch("https://rocketelevator.me/api/elevators");
+                const json = await response.json();
+
+                //console.log("response:", json);
+                setData(json);
+            } catch (error) {
+                console.error("error:", error);
+            }
+        };
+
+        getMoviesFromApiAsync();
+
+        // fetchData();
     }, []);
 
-    const renderItem = ({ item }) => {
-        const backgroundColor = item.id === selectedId ? "#6e3b6e" : "#f9c2ff";
-        const color = item.id === selectedId ? "white" : "black";
+    const onItemPress = (item) => {
+        console.log("onItemPress item:", item);
+        // onPress={ navigation,navigate("Status")};
 
-        return <Item item={item} onPress={() => setSelectedId(item.id)} backgroundColor={{ backgroundColor }} textColor={{ color }} />;
+        navigation.navigate("Status", {
+            itemId: item.id,
+            itemStatus: item.status,
+        });
+        // console.log("doit afficher page status", { Status });
+    };
+
+    const renderItem = ({ item }) => {
+        const backgroundColor = "#6e3b6e";
+        const color = "white";
+
+        return <Item item={item} onPress={() => onItemPress(item)} backgroundColor={{ backgroundColor }} textColor={{ color }} />;
     };
 
     return (
         <View>
-            <select style={{ backgroundColor: "red", height: "100%", width: "100%" }}></select>
-            <FlatList data={DATA} renderItem={renderItem} />
-            {/* keyExtractor={(item) => item.id} /> */}
+            {/* <select style={{ backgroundColor: "red", height: "100%", width: "100%" }}></select> */}
+            {data.length !== 0 && <FlatList data={data} renderItem={renderItem} keyExtractor={(item) => item.id} />}
         </View>
     ); // <div>
     //     {/* <h1>{fetchData}</h1> */}

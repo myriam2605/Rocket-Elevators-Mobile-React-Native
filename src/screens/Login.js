@@ -59,19 +59,19 @@ const Login = ({ navigation }) => {
     // };
 
     const validationEmail = async () => {
-        const listEmails = await fetchData();
-        console.log(listEmails.data);
+        // const listEmails = await fetchData();
+        // console.log(listEmails.data);
         // regarder email input si dans la liste
-        if (listEmails.data) {
-            navigation.navigate("Home");
-        } else {
-            console.log("777777777777777777777777777777777777777777");
-            // const ButtonAlert = () =>
-            // console.log("we have an error:", err);
-            alert("Ooooops enter an employee email");
-            window.location.reload(false);
-            // ButtonAlert;
-        }
+        // if (listEmails.data) {
+        navigation.navigate("Home");
+        // } else {
+        //     console.log("777777777777777777777777777777777777777777");
+        //     // const ButtonAlert = () =>
+        //     // console.log("we have an error:", err);
+        //     alert("Ooooops enter an employee email");
+        //     window.location.reload(false);
+        //     // ButtonAlert;
+        // }
     };
 
     return (

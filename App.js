@@ -10,6 +10,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import axios from "axios";
+import Status from "./src/screens/Status";
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,7 @@ const App = () => {
             <Stack.Navigator>
                 <Stack.Screen name="Login" component={Login} />
                 <Stack.Screen name="Home" component={Home} />
+                <Stack.Screen name="Status" component={Status} />
             </Stack.Navigator>
         </NavigationContainer>
     );
