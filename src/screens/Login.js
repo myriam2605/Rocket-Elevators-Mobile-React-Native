@@ -1,6 +1,6 @@
 import { View, Text, Image, StyleSheet, useWindowDimensions, Alert } from "react-native";
 import React, { useContext, useState, useEffect } from "react";
-// import Logo from "../../Logo/R2.png";
+import logo from "./images/R2.png";
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
 
@@ -83,7 +83,7 @@ const Login = ({ navigation }) => {
 
     return (
         <View style={styles.root}>
-            {/* <Image source={Logo} style={[styles.logo, { height: height * 0.3 }]} resizeMode="contain" /> */}
+            <Image source={logo} style={[styles.logo, { height: height * 0.3 }]} resizeMode="contain" />
             <CustomInput placeholder="Enter your Email" value={email} setValue={setEmail} onChangeText={(text) => setEmail(text)} />
 
             <CustomButton text="Login" onPress={() => validationEmail()} />
