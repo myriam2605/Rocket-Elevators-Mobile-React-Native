@@ -1,6 +1,6 @@
 import { View, Text, Button, FlatList, container, TouchableOpacity, StyleSheet } from "react-native";
 import React, { useEffect, useState } from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { useFocusEffect } from "@react-navigation/native";
 import axios from "axios";
 import Status from "./Status";
 // const DATA = [
@@ -39,23 +39,43 @@ const Home = ({ navigation }) => {
             })
             .catch((err) => console.log("we have an error:", err));
     };
-    useEffect(() => {
-        const getMoviesFromApiAsync = async () => {
-            try {
-                const response = await fetch("https://rocketelevator.me/api/elevators");
-                const json = await response.json();
+    // useEffect(() => {
+    //     console.log("hereee!");
+    //     const getMoviesFromApiAsync = async () => {
+    //         try {
+    //             const response = await fetch("https://rocketelevator.me/api/elevators");
+    //             const json = await response.json();
 
-                //console.log("response:", json);
-                setData(json);
-            } catch (error) {
-                console.error("error:", error);
-            }
-        };
+    //             //console.log("response:", json);
+    //             setData(json);
+    //         } catch (error) {
+    //             console.error("error:", error);
+    //         }
+    //     };
 
-        getMoviesFromApiAsync();
+    //     getMoviesFromApiAsync();
 
-        // fetchData();
-    }, []);
+    //     // fetchData();
+    // }, []);
+
+    useFocusEffect(
+        React.useCallback(() => {
+            console.log("hereee!");
+            const getMoviesFromApiAsync = async () => {
+                try {
+                    const response = await fetch("https://rocketelevator.me/api/elevators");
+                    const json = await response.json();
+
+                    //console.log("response:", json);
+                    setData(json);
+                } catch (error) {
+                    console.error("error:", error);
+                }
+            };
+
+            getMoviesFromApiAsync();
+        }, [])
+    );
 
     const onItemPress = (item) => {
         console.log("onItemPress item:", item);

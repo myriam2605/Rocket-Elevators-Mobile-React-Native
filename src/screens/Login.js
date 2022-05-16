@@ -16,36 +16,42 @@ const Login = ({ navigation }) => {
 
     const { height } = useWindowDimensions();
 
-    // const getMoviesFromApiAsync = async () => {
-    //     try {
-    //         const response = await fetch("https://reactnative.dev/movies.json");
-    //         const json = await response.json();
-    //         console.log("json:", json);
-    //         return json.movies;
-    //     } catch (error) {
-    //         console.error("failed to fetch:", error);
-    //     }
-    // };
+    const getMoviesFromApiAsync = async () => {
+        try {
+            const response = await fetch("http://174.95.251.226:5080/api/Users/email/david.amyot@codeboxx.biz");
+            // http://192.168.1.10:8080/api/admin/1
+            const json = await response.json();
+            console.log("json:", json);
+            return json.movies;
+        } catch (error) {
+            console.error("failed to fetch:", error);
+        }
+    };
 
     // getMoviesFromApiAsync();
 
+    console.log("tasdadasdest :");
+
     const fetchData = async () => {
-        const baseURL = `https://localhost:7162/api/Users/email/${email}`;
-        return await axios.get(`${baseURL}`);
-        // axios
-        //     .get(`${baseURL}`)
-        //     .then((response) => {
-        //         console.log(response.data);
-        //         return response.data;
-        //     })
-        //     .catch((err) => {
-        //         console.log("we have an error:", err);
-        //         return false;
-        //     });
+        // const baseURL = `/api/Users/email/${email}`;
+        const baseURL = `http://127.0.0.1:5080/api/Users/email/david.amyot@codeboxx.biz`;
+        // return await axios.get(`${baseURL}`);
+
+        console.log("baseurl: ", baseURL);
+        axios
+            .get(`${baseURL}`)
+            .then((response) => {
+                console.log(response.data);
+                return response.data;
+            })
+            .catch((err) => {
+                console.log("we have an error:", err);
+                return false;
+            });
     };
 
     // useEffect(() => {
-    //     fetchData();
+    //     getMoviesFromApiAsync();
     // }, []);
 
     //const val = useContext(AuthContext);
@@ -59,6 +65,7 @@ const Login = ({ navigation }) => {
     // };
 
     const validationEmail = async () => {
+        // console.log("test");
         // const listEmails = await fetchData();
         // console.log(listEmails.data);
         // regarder email input si dans la liste
@@ -79,7 +86,7 @@ const Login = ({ navigation }) => {
             {/* <Image source={Logo} style={[styles.logo, { height: height * 0.3 }]} resizeMode="contain" /> */}
             <CustomInput placeholder="Enter your Email" value={email} setValue={setEmail} onChangeText={(text) => setEmail(text)} />
 
-            <CustomButton text="Login" onPress={validationEmail} />
+            <CustomButton text="Login" onPress={() => validationEmail()} />
             {/* => navigation.navigate("home") */}
         </View>
     );
