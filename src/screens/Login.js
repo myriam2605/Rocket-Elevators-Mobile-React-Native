@@ -34,7 +34,7 @@ const Login = ({ navigation }) => {
 
     const fetchData = async () => {
         // const baseURL = `/api/Users/email/${email}`;
-        const baseURL = `http://127.0.0.1:5080/api/Users/email/david.amyot@codeboxx.biz`;
+        const baseURL = `http://127.0.0.1:5080/api/Users/email/${email}`;
         // return await axios.get(`${baseURL}`);
 
         console.log("baseurl: ", baseURL);
