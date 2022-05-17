@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from \"./CustomInput\";","map":{"version":3,"names":["default"],"sources":["C:/Users/amara/OneDrive/desktop/Front-end/Rocket-Elevators-Mobile-React-Native/my-app/src/components/CustomInput/index.js"],"sourcesContent":["export { default } from \"./CustomInput\";\r\n"],"mappings":"AAAA,SAASA,OAAT"},"metadata":{},"sourceType":"module"}
